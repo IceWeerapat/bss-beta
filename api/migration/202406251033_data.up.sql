@@ -1,0 +1,60 @@
+-- vim: filetype=SQL
+DROP TABLE IF EXISTS datas;
+
+CREATE TABLE datas (
+    id SERIAL PRIMARY KEY,
+    license_number VARCHAR(100) NOT NULL UNIQUE,
+    date_registration TIMESTAMPTZ NOT NULL,
+    province VARCHAR(50),
+    type VARCHAR(50),
+    characteristic VARCHAR(50),
+    brand VARCHAR(50),
+    model VARCHAR(50),
+    year INTEGER,
+    color VARCHAR(50),
+    vehicle_number VARCHAR(50),
+    location_vehicle VARCHAR(100),
+    engine_brand VARCHAR(50),
+    engine_number VARCHAR(50),
+    location_engine VARCHAR(100),
+    fuel VARCHAR(50),
+    gas_tank_number VARCHAR(50),
+    cylinder_count INTEGER,
+    cc INTEGER,
+    horsepower INTEGER,
+    axle_and_wheel_count INTEGER,
+    vehicle_weight DECIMAL,
+    load_weight DECIMAL,
+    total_weight DECIMAL,
+    seat_count INTEGER,
+    latest_owner_number VARCHAR(50),
+    ownership_date TIMESTAMPTZ,
+    owner VARCHAR(100),
+    id_card_number VARCHAR(100),
+    birth_date TIMESTAMPTZ,
+    nationality VARCHAR(100),
+    address TEXT,
+    phone VARCHAR(50),
+    lease_contract_number VARCHAR(50),
+    contract_date TIMESTAMPTZ,
+    last_tax_paid_date TIMESTAMPTZ,
+    tax_due_date TIMESTAMPTZ,
+    receipt_number VARCHAR(50),
+    tax_amount DECIMAL,
+    additional_amount DECIMAL,
+    recorder VARCHAR(50),
+    registrar VARCHAR(50),
+    last_update_date TIMESTAMPTZ,
+    picture_front TEXT,
+    picture_side TEXT,
+    picture_back TEXT,
+    created_at TIMESTAMPTZ DEFAULT current_timestamp,
+    created_by VARCHAR(50),
+    updated_at TIMESTAMPTZ DEFAULT current_timestamp,
+    updated_by VARCHAR(50)
+);
+
+CREATE TRIGGER trigger_update_datas_updated_at
+BEFORE UPDATE ON datas
+FOR EACH ROW
+EXECUTE FUNCTION update_updated_at();
